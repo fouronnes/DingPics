@@ -1,49 +1,17 @@
 -- MacroBook
 
 -- /console scriptErrors 1
+--[[
+TODO
+
+checkbox: import to character specific macros
+closable with escape
+
+]]
 
 MacroBook_VERSION = "0.1"
 
 local AceGUI = LibStub("AceGUI-3.0")
-
-macros = {
-
-{
-	name = "Bear powershift",
-	icon = "INV_MISC_QUESTIONMARK",
-	texture = 132091,
-	comment = "In bear form, powershift. In other forms go to bear form.",
-	text=[==[
-#showtooltip Bear form
-/cancelform
-/cast [nostance:1] Bear Form
-]==]
-},
-
-{
-	name = "Moonfire any form",
-	icon = "INV_MISC_QUESTIONMARK",
-	comment = "todo",
-	text =[==[
-#showtooltip Moonfire
-/cancelform
-/cast Moonfire
-]==]
-},
-
-{
-	name = "Rejuv anyform",
-	icon = "INV_MISC_QUESTIONMARK",
-	comment = "todo",
-	text =[==[
-#showtooltip
-/cancelform
-/cast Rejuvenation
-]==]
-},
-
-}
-
 
 local frame = AceGUI:Create("Window")
 frame:SetTitle("Macro Book")
@@ -66,8 +34,10 @@ function addMacro(macro_config)
 	
 	if macro_config["texture"] then
 		btn:SetImage(macro_config["texture"])
-	else
+	elseif macro_config["icon"] then
 		btn:SetImage(GetFileIDFromPath("Interface/Icons/" .. macro_config["icon"]))
+	else
+		btn:SetImage(GetFileIDFromPath("Interface/Icons/INV_MISC_QUESTIONMARK"))
 	end
 	
 	btn:SetWidth(36)
@@ -77,7 +47,7 @@ function addMacro(macro_config)
 
 	btn:SetCallback("OnClick", function(frame)
 		local name = macro_config["name"]
-		local icon = macro_config["icon"]
+		local icon = macro_config["icon"] or "INV_MISC_QUESTIONMARK"
 		local text = macro_config["text"]
 
 		-- Check if the macro already exists
@@ -98,7 +68,7 @@ function addMacro(macro_config)
 	end);
 end
 
-for i, macro in ipairs(macros) do
+for i, macro in ipairs(macro_database.druid) do
 	addMacro(macro)
 end
 

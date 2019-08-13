@@ -1,10 +1,8 @@
-
-
-if macros_database == nil then
-    macros_database = {}
+if macro_database == nil then
+    macro_database = {}
 end
 
-macros_database.mage = {
+macro_database.mage = {
 
 {
 name = "Smart Arcane Explosion",

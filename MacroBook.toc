@@ -27,5 +27,10 @@ libs\LibWindow-1.1\LibWindow-1.1.lua
 libs\SimpleSticky.lua
 
 # toc file is read on client restart only!
+
+MacroDatabase/druid.lua
+MacroDatabase/hunter.lua
+MacroDatabase/mage.lua
+
 WidgetMacroButton.lua
 MacroBook.lua

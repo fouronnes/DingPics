@@ -1,8 +1,8 @@
-if macros_database == nil then
-    macros_database = {}
+if macro_database == nil then
+    macro_database = {}
 end
 
-macros_database.druid = {
+macro_database.druid = {
 
 {
 name = "Feral Charge (anyform)",
@@ -132,6 +132,40 @@ name = "Faerie Fire (anyform)",
 comment = "Cast Faerie Fire or Faerie Fire (Feral) if shapeshifted",
 text = [==[
 /cast [noform, harm] Faerie Fire; [form:1/3, harm] Faerie Fire (Feral)
+]==]
+},
+
+{
+name = "Bear powershift",
+comment = "In bear form, powershift. In other forms go to bear form.",
+icon = "INV_MISC_QUESTIONMARK",
+texture = 132091,
+text = [==[
+#showtooltip Bear form
+/cancelform
+/cast [nostance:1] Bear Form
+]==]
+},
+
+{
+name = "Moonfire any form",
+comment = "todo",
+icon = "INV_MISC_QUESTIONMARK",
+text = [==[
+#showtooltip Moonfire
+/cancelform
+/cast Moonfire
+]==]
+},
+
+{
+name = "Rejuv anyform",
+comment = "todo",
+icon = "INV_MISC_QUESTIONMARK",
+text =[==[
+#showtooltip
+/cancelform
+/cast Rejuvenation
 ]==]
 },
 

@@ -1,8 +1,8 @@
-if macros_database == nil then
-    macros_database = {}
+if macro_database == nil then
+    macro_database = {}
 end
 
-macros_database.hunter = {
+macro_database.hunter = {
 
 {
 name = "Auto Shot (spammable)",
