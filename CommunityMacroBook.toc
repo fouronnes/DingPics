@@ -1,6 +1,6 @@
 ## Interface: 11302
 ## Author: fouronnes
-## Title: MacroBook
+## Title: CommunityMacroBook
 ## Notes: In-game book of community macros
 
 libs\LibStub\LibStub.lua
@@ -26,14 +26,17 @@ libs\LibWindow-1.1\LibWindow-1.1.lua
 
 libs\SimpleSticky.lua
 
-# toc file is read on client restart only!
-
+# Macro Database
 MacroDatabase/druid.lua
 MacroDatabase/hunter.lua
 MacroDatabase/mage.lua
 
+# Custom Widgets
 WidgetMacroButton.lua
 WidgetSkillButton.lua
+WidgetSearchBox.lua
+
+# Core
 data.lua
 gui.lua
-MacroBook.lua
+CommunityMacroBook.lua

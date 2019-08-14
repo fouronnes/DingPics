@@ -15,7 +15,7 @@ MacroBook_VERSION = "0.1"
 
 local AceGUI = LibStub("AceGUI-3.0")
 
-root_frame, tree_frame, scroll_frame = SetupBaseGUI()
+root_frame, tree_frame, scroll_frame, view_frame = SetupBaseGUI()
 
 function addMacro(parent_frame, macro_config)
 	local btn = AceGUI:Create("MacroButton")
@@ -62,9 +62,6 @@ function addMacro(parent_frame, macro_config)
 		PickupMacro(index)
 	end);
 end
-
-
-
 
 tree_frame:SetCallback("OnGroupSelected", function(self, event, group)
 	if group == "Imported" then
@@ -120,18 +117,5 @@ i can also just reproduce the template with the right textures & stuff
 ]]
 
 
-local view_frame = AceGUI:Create("InlineGroup")
---view_frame:SetTitle("View Frame")
---view_frame:SetLayout("Flow")
-view_frame:SetTitle("Title of the view frame")
-view_frame:SetHeight(200)
-view_frame:SetFullWidth(true)
-root_frame:AddChild(view_frame)
---view_frame:SetText("view frame")
 
-for i = 1,10 do
-	local label = AceGUI:Create("Label")
-	label:SetText(tostring(i) .. " label")
-	view_frame:AddChild(label)
-end
 
