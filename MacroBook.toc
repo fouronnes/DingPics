@@ -33,4 +33,5 @@ MacroDatabase/hunter.lua
 MacroDatabase/mage.lua
 
 WidgetMacroButton.lua
+WidgetSkillButton.lua
 MacroBook.lua

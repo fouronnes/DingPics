@@ -153,7 +153,7 @@ local spells = {
     "Regrowth", "Healing Touch", "Rejuvenation", "Tranquility",
     "Wrath", "Moonfire", "Starfire", "Entangling Roots", "Nature's Grasp", "Hurricane",
     "Mark of the Wild", "Thorns", "Innervate", "Barkskin",
-    "Cure Poinson", "Abolish Poison", "Remove Curse",
+    "Cure Poison", "Abolish Poison", "Remove Curse",
     "Hibernate", "Rebirth", "Omen of Clarity", "Insect Swarm", "Soothe Animal",
     "Teleport: Moonglade",
 }

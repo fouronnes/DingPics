@@ -8,7 +8,7 @@ checkbox: import to character specific macros
 closable with escape
 search box template from BlizzardInterfaceCode\Interface\SharedXML\SharedUIPanelTemplates.xml
 label: Want to submit a new macro? Found a bug? Contribute to Community Macro Book here: https://github.com/fouronnes/CommunityMacroBook
-
+call refresh on macro frame when importing
 ]]
 
 MacroBook_VERSION = "0.1"
@@ -17,7 +17,6 @@ local AceGUI = LibStub("AceGUI-3.0")
 
 local root_frame = AceGUI:Create("Window")
 root_frame:SetTitle("Macro Book")
-root_frame:SetStatusText("AceGUI-3.0 Example Container Frame")
 root_frame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
 root_frame:SetLayout("Flow")
 root_frame:EnableResize(true)
@@ -70,11 +69,16 @@ function addMacro(parent_frame, macro_config)
 	end);
 end
 
-for i, macro in ipairs(macro_database.druid) do
-	addMacro(root_frame, macro)
-end
-
 tree = { 
+
+{ 
+	value = "Imported",
+	text = "Imported",
+},
+{ 
+	value = "General",
+	text = "General",
+},
 { 
 	value = "Druid",
 	text = "Druid",
@@ -130,28 +134,34 @@ treeframe:SetLayout("Fill")
 root_frame:AddChild(treeframe)
 
 local scrollframe = AceGUI:Create("ScrollFrame")
-scrollframe:SetLayout("Flow")
+scrollframe:SetLayout("List")
 treeframe:AddChild(scrollframe)
 
-local button = AceGUI:Create("Button")
-button:SetText("click me")
-scrollframe:AddChild(button)
+local skill_buttons = {}
+local selected_skill = nil
 
-local checkbox = AceGUI:Create("CheckBox")
-checkbox:SetLabel("check me")
-checkbox:SetDescription("this is a description")
-checkbox:SetFullWidth(true)
-scrollframe:AddChild(checkbox)
 
-local dropdown = AceGUI:Create("Dropdown")
-dropdown:SetLabel("drop me")
-dropdown:SetList({"hello", "world", "again"})
-scrollframe:AddChild(dropdown)
+for i, macro in ipairs(macro_database.druid) do
+	--addMacro(root_frame, macro)
 
-local heading = AceGUI:Create("Heading")
-heading:SetText("heading!")
-heading:SetFullWidth(true)
-scrollframe:AddChild(heading)
+	local ilabel = AceGUI:Create("SkillButton")
+	ilabel:SetText(macro.name)
+
+	--ilabel:SetSize(293, 16)
+	ilabel:SetWidth(300)
+	ilabel:SetCallback("OnClick", function(frame)
+		print(macro.name)
+		frame:SetSelected(true)
+		if selected_skill then
+			selected_skill:SetSelected(false)
+		end
+		selected_skill = ilabel
+
+	end)
+	scrollframe:AddChild(ilabel)
+
+	table.insert(skill_buttons, ilabel)
+end
 
 --[[
 local button = CreateFrame("EditBox", "name", UIParent, "SearchBoxTemplate")
@@ -159,20 +169,6 @@ button:SetText("hlhqmlf")
 button:SetSize(80, 22)
 button:SetPoint("CENTER")
 ]]
-
-local mleb = AceGUI:Create("MultiLineEditBox")
-mleb:SetText(macro_database.druid[4].text)
-mleb:SetLabel("Macro text:")
-mleb:SetNumLines(6)
-scrollframe:AddChild(mleb)
-
-
-for i = 1,100 do
-	local frame2 = AceGUI:Create("Label")
-	frame2:SetText("hello world")
-	frame2:SetFullWidth(true)
-	scrollframe:AddChild(frame2)
-end
 
 print("MacroBook " .. MacroBook_VERSION .. " loaded")
 
@@ -186,3 +182,12 @@ the list of skill interface is made of:
 cannot test those templates with the retail client. Maybe they just work in the classic client
 i can also just reproduce the template with the right textures & stuff
 ]]
+
+local view_frame = AceGUI:Create("Window")
+view_frame:SetTitle("Macro Book")
+view_frame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
+view_frame:SetLayout("Flow")
+view_frame:EnableResize(true)
+view_frame:SetWidth(345)
+view_frame:SetHeight(435)
+view_frame:Hide()
