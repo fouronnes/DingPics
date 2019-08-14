@@ -15,13 +15,7 @@ MacroBook_VERSION = "0.1"
 
 local AceGUI = LibStub("AceGUI-3.0")
 
-local root_frame = AceGUI:Create("Frame") -- or Window?
-root_frame:SetTitle("Macro Book")
-root_frame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
-root_frame:SetLayout("List")
-root_frame:EnableResize(true)
---root_frame:SetWidth(545)
---root_frame:SetHeight(435)
+root_frame, tree_frame, scroll_frame = SetupBaseGUI()
 
 function addMacro(parent_frame, macro_config)
 	local btn = AceGUI:Create("MacroButton")
@@ -69,78 +63,12 @@ function addMacro(parent_frame, macro_config)
 	end);
 end
 
-tree = { 
-
-{ 
-	value = "Imported",
-	text = "Imported",
-},
-{ 
-	value = "General",
-	text = "General",
-},
-{ 
-	value = "Druid",
-	text = "Druid",
-	icon = "Interface\\Icons\\Inv_misc_monsterclaw_04",
-},
-{ 
-	value = "Hunter",
-	text = "Hunter",
-	icon = "Interface\\Icons\\inv_weapon_bow_07",
-},
-{ 
-	value = "Mage",
-	text = "Mage",
-	icon = "Interface\\Icons\\inv_staff_13",
-},
-{ 
-	value = "Paladin",
-	text = "Paladin",
-	icon = "Interface\\Icons\\ability_thunderbolt",
-},
-{ 
-	value = "Priest",
-	text = "Priest",
-	icon = "Interface\\Icons\\inv_staff_30",
-},
-{ 
-	value = "Rogue",
-	text = "Rogue",
-	icon = "Interface\\Icons\\inv_throwingknife_04",
-},
-{ 
-	value = "Shaman",
-	text = "Shaman",
-	icon = "Interface\\Icons\\inv_jewelry_talisman_04",
-},
-{ 
-	value = "Warlock",
-	text = "Warlock",
-	icon = "Interface\\Icons\\spell_nature_drowsy",
-},
-{ 
-value = "Warrior",
-text = "Warrior",
-icon = "Interface\\Icons\\inv_sword_27",
-},
-}
 
 
-local treeframe = AceGUI:Create("TreeGroup")
-treeframe:SetTree(tree)
-treeframe:SetFullWidth(true)
-treeframe:SetHeight(250)
-treeframe:SetLayout("Fill")
-root_frame:AddChild(treeframe)
 
-local scrollframe = AceGUI:Create("ScrollFrame")
-scrollframe:SetLayout("List")
-treeframe:AddChild(scrollframe)
-
-treeframe:SetCallback("OnGroupSelected", function(self, event, group)
+tree_frame:SetCallback("OnGroupSelected", function(self, event, group)
 	if group == "Imported" then
-		scrollframe:ReleaseChildren()
+		scroll_frame:ReleaseChildren()
 	elseif group == "Druid" then
 		fill_skills(macro_database.druid)
 	end
@@ -167,7 +95,7 @@ function fill_skills(macro_list)
 			selected_skill = ilabel
 
 		end)
-		scrollframe:AddChild(ilabel)
+		scroll_frame:AddChild(ilabel)
 	end
 end
 

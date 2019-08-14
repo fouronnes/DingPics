@@ -34,4 +34,6 @@ MacroDatabase/mage.lua
 
 WidgetMacroButton.lua
 WidgetSkillButton.lua
+data.lua
+gui.lua
 MacroBook.lua
