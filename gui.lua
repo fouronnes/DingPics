@@ -15,10 +15,10 @@ function SetupBaseGUI()
     search_group:SetFullWidth(true)
     root_frame:AddChild(search_group)
 
-    local padding = AceGUI:Create("Label")
-    --padding:SetText("padding")
-    padding:SetWidth(244)
-    search_group:AddChild(padding)
+    local checkbox = AceGUI:Create("CheckBox")
+    checkbox:SetLabel("Import to character specific macros")
+    checkbox:SetWidth(244) -- padding to align the search box right
+    search_group:AddChild(checkbox)
 
     local search_box = AceGUI:Create("SearchBox")
     --search_box:SetLabel("Search")
@@ -37,8 +37,7 @@ function SetupBaseGUI()
     scroll_frame:SetLayout("List")
     tree_frame:AddChild(scroll_frame)
 
-    local view_frame = AceGUI:Create("InlineGroup")
-    --view_frame:SetTitle("View Frame")
+    local view_frame = AceGUI:Create("SimpleGroup")
     --view_frame:SetLayout("Flow")
     --view_frame:SetTitle("Feral Charge (anyform) ")
     view_frame:SetHeight(200)
@@ -46,11 +45,29 @@ function SetupBaseGUI()
     root_frame:AddChild(view_frame)
     --view_frame:SetText("view frame")
 
-    for i = 1,10 do
-        local label = AceGUI:Create("Label")
-        --label:SetText(tostring(i) .. " label")
-        --view_frame:AddChild(label)
-    end
+    local macro_group = AceGUI:Create("SimpleGroup")
+    macro_group:SetLayout("Flow")
+    view_frame:AddChild(macro_group)
 
-    return root_frame, tree_frame, scroll_frame, view_frame
+    local macro_button = AceGUI:Create("MacroButton")
+    macro_button:SetImage(GetFileIDFromPath("Interface/Icons/ability_cheapshot"))
+    macro_button:SetWidth(36)
+	macro_button:SetHeight(36)
+    macro_button:SetImageSize(36, 36)
+    macro_group:AddChild(macro_button)
+
+    local macro_title = AceGUI:Create("Label")
+    macro_title:SetText("Faerie Fire (anyform)")
+    macro_title:SetHeight(30)
+    --fontName, fontHeight, fontFlags = MyFontObject:GetFont()
+    macro_title:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE, MONOCHROME")
+
+    macro_group:AddChild(macro_title)
+
+    local macro_comment = AceGUI:Create("Label")
+    macro_comment:SetText("Cast Faerie Fire or Faerie Fire (Feral) if shapeshifted.")
+    macro_comment:SetFullWidth(true)
+    view_frame:AddChild(macro_comment)
+
+    return tree_frame, scroll_frame, macro_title, macro_comment
 end

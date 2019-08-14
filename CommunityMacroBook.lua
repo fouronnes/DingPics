@@ -7,7 +7,6 @@ TODO
 checkbox: import to character specific macros
 closable with escape
 search box template from BlizzardInterfaceCode\Interface\SharedXML\SharedUIPanelTemplates.xml
-label: Want to submit a new macro? Found a bug? Contribute to Community Macro Book here: https://github.com/fouronnes/CommunityMacroBook
 call refresh on macro frame when importing
 ]]
 
@@ -15,7 +14,7 @@ MacroBook_VERSION = "0.1"
 
 local AceGUI = LibStub("AceGUI-3.0")
 
-root_frame, tree_frame, scroll_frame, view_frame = SetupBaseGUI()
+tree_frame, scroll_frame, macro_title, macro_comment  = SetupBaseGUI()
 
 function addMacro(parent_frame, macro_config)
 	local btn = AceGUI:Create("MacroButton")
@@ -88,8 +87,13 @@ function fill_skills(macro_list)
 			frame:SetSelected(true)
 			if selected_skill then
 				selected_skill:SetSelected(false)
+				selected_skill:SetColor(.2, .9, .2)
 			end
 			selected_skill = ilabel
+			frame:SetColor(1, 1, 1)
+
+			macro_title:SetText(macro.name)
+			macro_comment:SetText(macro.comment)
 
 		end)
 		scroll_frame:AddChild(ilabel)
