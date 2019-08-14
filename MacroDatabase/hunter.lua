@@ -6,7 +6,7 @@ macro_database.hunter = {
 
 {
 name = "Auto Shot (spammable)",
-comment = "Spammable version of regular Auto Shot",
+comment = "Spammable version of regular Auto Shot.",
 text = [==[
 #showtooltip Auto Shot
 /cast !Auto Shot

@@ -5,6 +5,18 @@ end
 macro_database.druid = {
 
 {
+name = "Bear powershift",
+comment = "In bear form, powershift. In other forms go to bear form.",
+icon = "INV_MISC_QUESTIONMARK",
+texture = 132091,
+text = [==[
+#showtooltip Bear form
+/cancelform
+/cast [nostance:1] Bear Form
+]==]
+},
+
+{
 name = "Feral Charge (anyform)",
 comment = "Go to Bear Form if necessary and cast Feral Charge.",
 text = [==[
@@ -29,14 +41,14 @@ text = [==[
 },
 
 {
-name = "Sprint (anyform)",
-comment = "Go to Cat form if necessary and cast Sprint.",
+name = "Dash (anyform)",
+comment = "Go to Cat form if necessary and cast Dash.",
 text = [==[
 #show Sprint
 /dismount [mounted]
 /cancelform [noform:3]
 /cast [noform:3] !Cat Form
-/cast [form:3] Sprint
+/cast [form:3] Dash
 ]==]
 },
 
@@ -59,7 +71,7 @@ text = [==[
 },
 
 {
-name = "Travel or Aquatic form",
+name = "Trave or Aquatic form",
 comment = "Aquatic Form if swimming, Travel Form if not.",
 text = [==[
 #showtooltip
@@ -129,44 +141,39 @@ text = [==[
 
 {
 name = "Faerie Fire (anyform)",
-comment = "Cast Faerie Fire or Faerie Fire (Feral) if shapeshifted",
+comment = "Cast Faerie Fire or Faerie Fire (Feral) if shapeshifted.",
 text = [==[
 /cast [noform, harm] Faerie Fire; [form:1/3, harm] Faerie Fire (Feral)
 ]==]
 },
 
-{
-name = "Bear powershift",
-comment = "In bear form, powershift. In other forms go to bear form.",
-icon = "INV_MISC_QUESTIONMARK",
-texture = 132091,
-text = [==[
-#showtooltip Bear form
-/cancelform
-/cast [nostance:1] Bear Form
-]==]
-},
+}
 
-{
-name = "Moonfire any form",
-comment = "todo",
-icon = "INV_MISC_QUESTIONMARK",
-text = [==[
-#showtooltip Moonfire
-/cancelform
-/cast Moonfire
-]==]
-},
+local spells = {
+    "Regrowth", "Healing Touch", "Rejuvenation", "Tranquility",
+    "Wrath", "Moonfire", "Starfire", "Entangling Roots", "Nature's Grasp", "Hurricane",
+    "Mark of the Wild", "Thorns", "Innervate", "Barkskin",
+    "Cure Poinson", "Abolish Poison", "Remove Curse",
+    "Hibernate", "Rebirth", "Omen of Clarity", "Insect Swarm", "Soothe Animal",
+    "Teleport: Moonglade",
+}
 
+local macro_spell_template =
 {
-name = "Rejuv anyform",
-comment = "todo",
-icon = "INV_MISC_QUESTIONMARK",
-text =[==[
+name = "%s (anyform)",
+comment = "Cancel current shapeshift and cast maximum rank %s.",
+text = [==[
 #showtooltip
 /cancelform
-/cast Rejuvenation
+/cast %s
 ]==]
-},
-
 }
+
+for _, spell in ipairs(spells) do
+    local macro = {
+        name = string.format(macro_spell_template.name, spell),
+        comment = string.format(macro_spell_template.comment, spell),
+        text = string.format(macro_spell_template.text, spell),
+    }
+    table.insert(macro_database.druid, macro)
+end
