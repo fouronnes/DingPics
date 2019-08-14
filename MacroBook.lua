@@ -147,8 +147,9 @@ for i, macro in ipairs(macro_database.druid) do
 	local ilabel = AceGUI:Create("SkillButton")
 	ilabel:SetText(macro.name)
 
-	--ilabel:SetSize(293, 16)
+	ilabel:SetColor(.2, .9, .2)
 	ilabel:SetWidth(300)
+	ilabel:SetHeight(20)
 	ilabel:SetCallback("OnClick", function(frame)
 		print(macro.name)
 		frame:SetSelected(true)

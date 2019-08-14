@@ -75,6 +75,10 @@ local methods = {
 			self.frame:UnlockHighlight()
 		end
 	end,
+
+	["SetColor"] = function(self, r, g, b)
+		self.text:SetTextColor(r, g, b)
+	end,
 }
 
 --[[-----------------------------------------------------------------------------
