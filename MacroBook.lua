@@ -15,13 +15,13 @@ MacroBook_VERSION = "0.1"
 
 local AceGUI = LibStub("AceGUI-3.0")
 
-local root_frame = AceGUI:Create("Window")
+local root_frame = AceGUI:Create("Frame") -- or Window?
 root_frame:SetTitle("Macro Book")
 root_frame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
-root_frame:SetLayout("Flow")
+root_frame:SetLayout("List")
 root_frame:EnableResize(true)
-root_frame:SetWidth(545)
-root_frame:SetHeight(435)
+--root_frame:SetWidth(545)
+--root_frame:SetHeight(435)
 
 function addMacro(parent_frame, macro_config)
 	local btn = AceGUI:Create("MacroButton")
@@ -130,7 +130,7 @@ icon = "Interface\\Icons\\inv_sword_27",
 local treeframe = AceGUI:Create("TreeGroup")
 treeframe:SetTree(tree)
 treeframe:SetFullWidth(true)
-treeframe:SetFullHeight(true)
+treeframe:SetHeight(250)
 treeframe:SetLayout("Fill")
 root_frame:AddChild(treeframe)
 
@@ -192,9 +192,18 @@ i can also just reproduce the template with the right textures & stuff
 ]]
 
 
-local view_frame = AceGUI:Create("Label")
+local view_frame = AceGUI:Create("InlineGroup")
+--view_frame:SetTitle("View Frame")
 --view_frame:SetLayout("Flow")
+view_frame:SetTitle("Title of the view frame")
 view_frame:SetHeight(200)
-view_frame:SetText("view frame")
 view_frame:SetFullWidth(true)
 root_frame:AddChild(view_frame)
+--view_frame:SetText("view frame")
+
+for i = 1,10 do
+	local label = AceGUI:Create("Label")
+	label:SetText(tostring(i) .. " label")
+	view_frame:AddChild(label)
+end
+
