@@ -20,7 +20,7 @@ root_frame:SetTitle("Macro Book")
 root_frame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
 root_frame:SetLayout("Flow")
 root_frame:EnableResize(true)
-root_frame:SetWidth(345)
+root_frame:SetWidth(545)
 root_frame:SetHeight(435)
 
 function addMacro(parent_frame, macro_config)
@@ -126,6 +126,7 @@ icon = "Interface\\Icons\\inv_sword_27",
 },
 }
 
+
 local treeframe = AceGUI:Create("TreeGroup")
 treeframe:SetTree(tree)
 treeframe:SetFullWidth(true)
@@ -137,31 +138,37 @@ local scrollframe = AceGUI:Create("ScrollFrame")
 scrollframe:SetLayout("List")
 treeframe:AddChild(scrollframe)
 
-local skill_buttons = {}
+treeframe:SetCallback("OnGroupSelected", function(self, event, group)
+	if group == "Imported" then
+		scrollframe:ReleaseChildren()
+	elseif group == "Druid" then
+		fill_skills(macro_database.druid)
+	end
+end)
+
 local selected_skill = nil
 
+function fill_skills(macro_list)
+	for i, macro in ipairs(macro_list) do
+		--addMacro(root_frame, macro)
+	
+		local ilabel = AceGUI:Create("SkillButton")
+		ilabel:SetText(macro.name)
 
-for i, macro in ipairs(macro_database.druid) do
-	--addMacro(root_frame, macro)
+		ilabel:SetColor(.2, .9, .2)
+		ilabel:SetWidth(300)
+		ilabel:SetHeight(20)
+		ilabel:SetCallback("OnClick", function(frame)
+			print(macro.name)
+			frame:SetSelected(true)
+			if selected_skill then
+				selected_skill:SetSelected(false)
+			end
+			selected_skill = ilabel
 
-	local ilabel = AceGUI:Create("SkillButton")
-	ilabel:SetText(macro.name)
-
-	ilabel:SetColor(.2, .9, .2)
-	ilabel:SetWidth(300)
-	ilabel:SetHeight(20)
-	ilabel:SetCallback("OnClick", function(frame)
-		print(macro.name)
-		frame:SetSelected(true)
-		if selected_skill then
-			selected_skill:SetSelected(false)
-		end
-		selected_skill = ilabel
-
-	end)
-	scrollframe:AddChild(ilabel)
-
-	table.insert(skill_buttons, ilabel)
+		end)
+		scrollframe:AddChild(ilabel)
+	end
 end
 
 --[[
@@ -184,11 +191,10 @@ cannot test those templates with the retail client. Maybe they just work in the 
 i can also just reproduce the template with the right textures & stuff
 ]]
 
-local view_frame = AceGUI:Create("Window")
-view_frame:SetTitle("Macro Book")
-view_frame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
-view_frame:SetLayout("Flow")
-view_frame:EnableResize(true)
-view_frame:SetWidth(345)
-view_frame:SetHeight(435)
-view_frame:Hide()
+
+local view_frame = AceGUI:Create("Label")
+--view_frame:SetLayout("Flow")
+view_frame:SetHeight(200)
+view_frame:SetText("view frame")
+view_frame:SetFullWidth(true)
+root_frame:AddChild(view_frame)
