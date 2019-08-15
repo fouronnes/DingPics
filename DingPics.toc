@@ -1,0 +1,6 @@
+## Interface: 11302
+## Author: fouronnes
+## Title: DingPics
+## Notes: Automatically save a screenshot when you level-up
+
+DingPics.lua
