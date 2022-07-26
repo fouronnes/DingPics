@@ -1,0 +1,4 @@
+package-as: DingPics
+
+ignore:
+  - docs
