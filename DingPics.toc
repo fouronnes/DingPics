@@ -1,6 +1,6 @@
-## Interface: 20504
+## Interface: 30400
 ## Title: DingPics
 ## Notes: Automatically save a screenshot when you level-up
-## Author: fouronnes
+## Author: fouronnes, Serrol
 
 DingPics.lua
